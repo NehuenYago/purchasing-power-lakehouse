@@ -43,7 +43,7 @@ def fetch_and_send():
             message_value = json.dumps(payload)
 
             # produces message to "raw_currency" topic and delivery_report will be called
-            producer.produce("raw_currency", value="message_value", on_delivery="delivery_report")
+            producer.produce("raw_currency", value=message_value, on_delivery=delivery_report)
             
             # pushes message form internal buffer to Kafka
             producer.flush()
