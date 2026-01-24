@@ -1,5 +1,6 @@
 services:
 
+# KAFKA
   zookeeper:
     image: "confluentinc/cp-zookeeper:7.5.0"
     ports: 
@@ -21,3 +22,25 @@ services:
       KAFKA_LISTENERS: INTERNAL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:29092,EXTERNAL://localhost:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+
+# SPARK
+
+  spark-master:
+    image: "bitnamilegacy/spark:3.5.0"
+    ports:
+      - '8080:8080' # web UI
+      - '7077:7077' # communication with worker
+    environment:
+      SPARK_MODE: master
+
+  spark-worker:
+    image: "bitnamilegacy/spark:3.5.0"
+    depends_on:
+      - spark-master
+    environment:
+      SPARK_MODE: worker
+      SPARK_MASTER_URL: spark://spark-master:7077
+      SPARK_WORKER_CORES: 2
+      SPARK_WORKER_MEMORY: 2g
+    volumes:
+      - ./processing:/opt/bitnami/spark/processing 
