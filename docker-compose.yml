@@ -32,6 +32,8 @@ services:
       - '7077:7077' # communication with worker
     environment:
       SPARK_MODE: master
+    volumes:
+      - ./processing:/opt/bitnami/spark/processing 
 
   spark-worker:
     image: "bitnamilegacy/spark:3.5.0"
