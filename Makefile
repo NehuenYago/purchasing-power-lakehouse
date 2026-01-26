@@ -37,3 +37,6 @@ run-process-donations:
 run-process-currency:
 	docker exec -it purchasing-power-lakehouse-spark-master-1 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 /opt/bitnami/spark/processing/spark_jobs/process_currency.py
 
+# run spark processing/spark_jobs/calculate-actual-uds.py file
+run-process-calculate:
+	docker exec -it purchasing-power-lakehouse-spark-master-1 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 /opt/bitnami/spark/processing/spark_jobs/calculate_actual_usd.py
