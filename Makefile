@@ -33,3 +33,7 @@ list-topics:
 run-process-donations:
 	docker exec -it purchasing-power-lakehouse-spark-master-1 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 /opt/bitnami/spark/processing/spark_jobs/process_donations.py
 
+# run spark processing/spark_jobs/process_currency.py file
+run-process-currency:
+	docker exec -it purchasing-power-lakehouse-spark-master-1 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 /opt/bitnami/spark/processing/spark_jobs/process_currency.py
+
