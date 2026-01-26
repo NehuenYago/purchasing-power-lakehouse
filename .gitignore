@@ -1,1 +1,6 @@
 .venv
+
+# Spark
+.metadata.*/
+*.parquet
+*.crc
