@@ -23,9 +23,9 @@ donations_schema = StructType([
     StructField("amount_ars", DoubleType(), False),
     StructField("donor_type", StringType(), False),
     StructField("timestamp", DoubleType(), False)
-    ])
+])
 
-# uses .selectExpr() to cast the 'value' column from binary (from kafka) to string)
+# uses .selectExpr() to cast the 'value' column from binary (from kafka) to string
 donations_string = raw_donations_df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
  
 # turns the json-string and the defined schema and turns it into a spark struct
