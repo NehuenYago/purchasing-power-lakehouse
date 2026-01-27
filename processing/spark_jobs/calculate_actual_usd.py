@@ -64,14 +64,23 @@ currency_df = currency_df.withColumn("timestamp",sf.timestamp_seconds(sf.col("ti
 # ===== JOIN STREAMS =====
 
 # add watermark to streams in preparation for join()
-donations_df_wtmrk = donations_df.withWatermark("timestamp", "5 minutes")
-currency_df_wtmrk = currency_df.withWatermark("timestamp", "10 minutes")
+# create 'join_hour' column to fullfil spark's equality predicate for stream-stream join
+donations_df_wtmrk = donations_df.withWatermark("timestamp", "5 minutes") \
+        .withColumn("join_hour", sf.date_trunc("minute", sf.col("timestamp"))) \
+        .alias("d")
 
-# join donation with last currency update
+currency_df_wtmrk = currency_df.withWatermark("timestamp", "10 minutes") \
+        .withColumn("join_hour", sf.date_trunc("minute", sf.col("timestamp"))) \
+        .alias("c")
+
+# join donation with last currency update, newer than an hour
 actual_usd_df = donations_df_wtmrk.join(
     currency_df_wtmrk,
-    (donations_df_wtmrk.timestamp >= currency_df_wtmrk.timestamp) &
-    (donations_df_wtmrk.timestamp <= currency_df_wtmrk.timestamp + sf.expr("interval 1 hour")),
+    sf.expr("""
+        d.join_hour = c.join_hour AND
+        d.timestamp >= c.timestamp AND
+        d.timestamp <= c.timestamp + interval 1 hour
+    """),
     "inner"
 )
 
