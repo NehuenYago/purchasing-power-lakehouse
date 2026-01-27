@@ -68,7 +68,8 @@ currency_df_wtmrk = currency_df.withWatermark("timestamp", "10 minutes")
 # join donation with last currency update
 actual_usd_df = donations_df_wtmrk.join(
     currency_df_wtmrk,
-    donations_df_wtmrk.timestamp >= currency_df_wtmrk.timestamp,
+    (donations_df_wtmrk.timestamp >= currency_df_wtmrk.timestamp) &
+    (donations_df_wtmrk.timestamp >= currency_df_wtmrk.timestamp + sf.expr("interval 1 hour")),
     "inner"
 )
 
