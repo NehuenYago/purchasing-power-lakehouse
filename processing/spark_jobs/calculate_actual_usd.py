@@ -16,6 +16,7 @@ raw_donations_df = spark \
         .format("kafka") \
         .option("kafka.bootstrap.servers", "kafka:29092") \
         .option("subscribe", "raw_donations") \
+        .option("startingOffsets", "earliest") \
         .load()
 
 raw_currency_df = spark \
@@ -23,6 +24,7 @@ raw_currency_df = spark \
         .format("kafka") \
         .option("kafka.bootstrap.servers", "kafka:29092") \
         .option("subscribe", "raw_currency") \
+        .option("startingOffsets", "earliest") \
         .load()
 
 # define the schema for the streams
