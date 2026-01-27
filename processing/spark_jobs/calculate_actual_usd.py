@@ -80,7 +80,8 @@ actual_usd_df = actual_usd_df.withColumn("amount_usd", sf.col("amount_ars")/sf.c
 # stream output to new table
 query = actual_usd_df.writeStream.format("parquet") \
         .outputMode("append") \
-        .option("checkpointLocation", "/opt/bitnami/spark/processing/checkpoints/donations_usd") \
-        .toTable("donations_usd")
+        .option("checkpointLocation", "/opt/bitnami/spark/processing/checkpoints/actual_donations_usd") \
+        .option("path", "/opt/bitnami/spark/processing/data/actual_donations_usd") \
+        .toTable("actual_donations_usd")
 
 query.awaitTermination()
