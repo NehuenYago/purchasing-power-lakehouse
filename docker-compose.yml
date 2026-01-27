@@ -28,8 +28,9 @@ services:
   spark-master:
     image: "bitnamilegacy/spark:3.5.0"
     ports:
-      - '8080:8080' # web UI
+      - '8080:8080' # web UI of Master
       - '7077:7077' # communication with worker
+      - '4040:4040' # web UI of Driver
     environment:
       SPARK_MODE: master
     volumes:
