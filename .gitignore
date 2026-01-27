@@ -4,3 +4,4 @@
 .metadata.*/
 *.parquet
 *.crc
+processing/metadata
