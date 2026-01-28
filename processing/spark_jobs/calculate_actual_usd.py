@@ -87,7 +87,8 @@ actual_usd_df = donations_df_wtmrk.join(
 
 # calculate the actual amount of usd from the donation based on current price of dollar 'blue'
 actual_usd_df = actual_usd_df.withColumn("amount_usd", sf.col("amount_ars")/sf.col("blue")) \
-        .select(donations_df_wtmrk.timestamp, donations_df_wtmrk.donation_id, sf.col("amount_usd"))
+        .select(donations_df_wtmrk.timestamp, donations_df_wtmrk.donation_id, donations_df_wtmrk.campaign_id,
+                donations_df_wtmrk.amount_ars, currency_df_wtmrk.blue, sf.col("amount_usd"))
  
 # stream output to new table
 query = actual_usd_df.writeStream.format("parquet") \
