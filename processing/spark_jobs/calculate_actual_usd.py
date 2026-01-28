@@ -6,6 +6,7 @@ import pyspark.sql.functions as sf
 spark = SparkSession \
         .builder \
         .appName("CalculateUSD") \
+        .config("spark.sql.shuffle.partitions", "4") \
         .getOrCreate()
 
 # ===== CREATE AND CLEAN STREAMS =====
