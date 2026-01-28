@@ -90,8 +90,14 @@ actual_usd_df = actual_usd_df.withColumn("amount_usd", sf.col("amount_ars")/sf.c
         .select(donations_df_wtmrk.timestamp, donations_df_wtmrk.donation_id, donations_df_wtmrk.campaign_id,
                 donations_df_wtmrk.amount_ars, currency_df_wtmrk.blue, sf.col("amount_usd"))
  
+# ===== DATA QUALITY CHECKS =====
+
+actual_usd_df_cleaned = actual_usd_df.filter(
+    "amount_ars > 0 AND blue > 0 AND amount_usd IS NOT NULL"
+)
+
 # stream output to new table
-query = actual_usd_df.writeStream.format("parquet") \
+query = actual_usd_df_cleaned.writeStream.format("parquet") \
         .outputMode("append") \
         .option("checkpointLocation", "/opt/bitnami/spark/processing/checkpoints/actual_donations_usd") \
         .option("path", "/opt/bitnami/spark/processing/data/actual_donations_usd") \
