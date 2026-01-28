@@ -8,4 +8,4 @@ spark.sparkContext.setLogLevel("WARN")
 df_parquet = spark.read.parquet("/opt/bitnami/spark/processing/data/actual_donations_usd")
 df_parquet.show()
 
-print(f"Total de registros procesados: {df_parquet.count()}")
+print(f"Total number of records processed: {df_parquet.count()}")
