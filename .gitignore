@@ -6,3 +6,4 @@ checkpoints/
 *.parquet
 *.crc
 processing/metadata
+processing/data
