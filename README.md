@@ -1,5 +1,7 @@
 # Real-Time Donation Tracking & Currency Conversion
 
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)![Apache Spark](https://img.shields.io/badge/Apache%20Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
+
 ## Project Overview
 In high-inflation economies like Argentina, fundraising campaigns often set goals in USD while receiving donations in local currency (ARS). Due to currency volatility, the "real value" of the total collected fluctuates daily. 
 
@@ -24,6 +26,13 @@ The current implementation follows a streaming pattern using Dockerized services
 * **Message Broker:** Apache Kafka & Zookeeper
 * **Stream Processing:** Apache Spark Structured Streaming
 * **Storage:** Parquet (Local Data Lakehouse)
+
+## Prerequisites
+- **Docker** v29.0+ & **Docker Compose** v5.0+
+- **uv** v0.9+
+- **Make** v4.0+
+- **Python** 3.13+
+- Python libraries are automatically managed by `uv` using the provided `uv.lock` file, ensuring environment parity across different machines.
 
 ## How to Run
 1.  **Clone the repo:** `git clone https://github.com/NehuenYago/purchasing-power-lakehouse`
