@@ -1,7 +1,6 @@
 # Real-Time Donation Tracking & Currency Conversion
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)![Apache Spark](https://img.shields.io/badge/Apache%20Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
-
+![Python](https://img.shields.io/badge/python-3776AB?style=flat-square&logo=python&logoColor=white) ![Apache Spark](https://img.shields.io/badge/spark-E25A1C?style=flat-square&logo=apachespark&logoColor=white) ![Apache Kafka](https://img.shields.io/badge/kafka-231F20?style=flat-square&logo=apachekafka&logoColor=white) ![Docker](https://img.shields.io/badge/docker-2496ED?style=flat-square&logo=docker&logoColor=white) 
 ## Project Overview
 In high-inflation economies like Argentina, fundraising campaigns often set goals in USD while receiving donations in local currency (ARS). Due to currency volatility, the "real value" of the total collected fluctuates daily. 
 
