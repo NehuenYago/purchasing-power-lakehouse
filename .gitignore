@@ -7,3 +7,6 @@ checkpoints/
 *.crc
 processing/metadata
 processing/data
+
+# misc
+todo.txt
