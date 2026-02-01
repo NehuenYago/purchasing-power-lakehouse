@@ -1,3 +1,7 @@
+# Environmental Variables
+.env
+
+# Python Packages
 .venv
 
 # Spark
@@ -7,6 +11,9 @@ checkpoints/
 *.crc
 processing/metadata
 processing/data
+
+# PostgreSQL
+postgresql/
 
 # misc
 todo.txt
