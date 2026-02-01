@@ -24,7 +24,6 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
 
 # SPARK
-
   spark-master:
     image: "bitnamilegacy/spark:3.5.0"
     ports:
@@ -47,3 +46,19 @@ services:
       SPARK_WORKER_MEMORY: 2g
     volumes:
       - ./processing:/opt/bitnami/spark/processing 
+
+# PostgreSQL
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD} 
+      POSTGRES_DB: ${DB_NAME} 
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+
+    
+
