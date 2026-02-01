@@ -7,6 +7,7 @@ spark = SparkSession \
         .builder \
         .appName("CampaingTotals") \
         .config("spark.sql.shuffle.partitions", "4") \
+        .config("spark.jars.packages","org.postgresql:postgresql:42.7.3")
         .getOrCreate()
 
 spark.sparkContext.setLogLevel("WARN")
@@ -44,11 +45,3 @@ query = campaigns_df.writeStream \
     .start()
 
 query.awaitTermination()
-
-
-
-# query = campaigns_df.writeStream.format("parquet") \
-#         .outputMode("complete") \
-#         .option("checkpointLocation", "/opt/bitnami/spark/processing/checkpoints/campaigns_total_donations") \
-#         .option("path", "/opt/bitnami/spark/processing/data/campaigns_total_donations") \
-#         .toTable("campaigns_total_donations")
