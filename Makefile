@@ -48,3 +48,7 @@ run-process-totals:
 # show the output table created by spark
 check-data:
 	docker exec -it purchasing-power-lakehouse-spark-master-1 spark-submit /opt/bitnami/spark/processing/scripts/check_results.py
+
+# Delete checkpoints and data
+clean-checkpoints-data:
+	sudo find processing/data/actual_donations_usd/ -mindepth 1 -delete & sudo find processing/checkpoints/ -mindepth 1 -delete
