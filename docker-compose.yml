@@ -29,9 +29,11 @@ services:
     ports:
       - '8080:8080' # web UI of Master
       - '7077:7077' # communication with worker
-      - '4040:4040' # web UI of Driver
+      - '4040-4042:4040-4042' # web UI of Driver
     environment:
       SPARK_MODE: master
+    env_file:
+      - .env
     volumes:
       - ./processing:/opt/bitnami/spark/processing 
 
