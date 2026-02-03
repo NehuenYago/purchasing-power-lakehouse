@@ -1,16 +1,20 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as sf
 from pyspark.sql.types import *
+import os
+import logging
+
+DB_USER = str(os.getenv("DB_USER"))
+DB_PASSWORD = str(os.getenv("DB_PASSWORD"))
+DB_NAME = str(os.getenv("DB_NAME"))
 
 # create Spark Session
 spark = SparkSession \
         .builder \
         .appName("CampaingTotals") \
         .config("spark.sql.shuffle.partitions", "4") \
-        .config("spark.jars.packages","org.postgresql:postgresql:42.7.3")
+        .config("spark.jars", "/opt/bitnami/spark/jars/postgresql-42.7.3.jar") \
         .getOrCreate()
-
-spark.sparkContext.setLogLevel("WARN")
 
 donations_schema = StructType([
     StructField("timestamp", TimestampType(), False),
@@ -39,9 +43,21 @@ campaigns_df = campaigns_df \
                 sf.col("median_donation_usd")
         )
 
+def write_to_db (df, batchId):
+    if not df.isEmpty():
+        df.write.jdbc(url="jdbc:postgresql://db:5432/" + DB_NAME, 
+                      table=DB_NAME, 
+                      mode="overwrite", 
+                      properties={
+                          "user": DB_USER, 
+                          "password": DB_PASSWORD,
+                          "driver": "org.postgresql.Driver"
+                          }
+                      )
+
 query = campaigns_df.writeStream \
     .outputMode("complete") \
-    .format("console") \
-    .start()
-
-query.awaitTermination()
+    .foreachBatch(write_to_db) \
+    .option("checkpointLocation", "/opt/bitnami/spark/processing/checkpoints/campaigns_total_donations") \
+    .start() \
+    .awaitTermination()
