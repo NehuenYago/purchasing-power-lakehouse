@@ -43,7 +43,7 @@ run-process-calculate:
 
 # run spark processing/spark_jobs/calculate-actual-uds.py file
 run-process-totals:
-	docker exec -it purchasing-power-lakehouse-spark-master-1 spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 /opt/bitnami/spark/processing/spark_jobs/calculate_campaign_totals.py
+	docker exec -it purchasing-power-lakehouse-spark-master-1 spark-submit /opt/bitnami/spark/processing/spark_jobs/calculate_campaign_totals.py
 
 # show the output table created by spark
 check-data:
