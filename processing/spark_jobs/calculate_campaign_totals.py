@@ -13,7 +13,6 @@ spark = SparkSession \
         .builder \
         .appName("CampaingTotals") \
         .config("spark.sql.shuffle.partitions", "4") \
-        .config("spark.jars", "/opt/bitnami/spark/jars/postgresql-42.7.3.jar") \
         .getOrCreate()
 
 donations_schema = StructType([

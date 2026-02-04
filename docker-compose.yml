@@ -31,7 +31,8 @@ services:
       - '7077:7077' # communication with worker
       - '4040-4042:4040-4042' # web UI of Driver
     environment:
-      SPARK_MODE: master
+      SPARK_MODE: "master"
+      PYSPARK_SUBMIT_ARGS: "--packages org.postgresql:postgresql:42.7.3 pyspark-shell"
     env_file:
       - .env
     volumes:
